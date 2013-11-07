@@ -1,0 +1,17 @@
+$ cat .gitignore
+
+# Mr Developer
+.mr.developer.cfg
+.project
+.pydevproject
+.settings/*
+*.pyc
+
+# MAC
+.DS_Store
+
+
+#Misc
+*~
+*~HEAD
+*.prefs
