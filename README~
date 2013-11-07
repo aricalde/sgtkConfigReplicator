@@ -1,0 +1,96 @@
+csTankReplicator
+Tool to replicate tank project configs to various projects.
+
+Here at Cluster Studio we have many projects running in parallel, and
+some times we need a patch in the Tank config for all of them, so we
+build this app to simplify the process of replicate configs between
+projects.
+
+The app get a list of projects where you select origin and target
+projects, then specify what config folders will be synchronized.
+
+
+You have a config file, where you configure different jobs(folders)
+that will be replicated from one project to the others.
+
+ - jobs_config.yml
+ 
+ 	The configs are based on the PyYAML syntax, so you need
+ 	to have this module.
+ 	
+ 	Each job has the following structure:
+ 	
+ 	'''
+ 	
+	 Schema-Templates:
+	  path: /tank/config/core/
+	  exclutions:
+	  - 'hooks'
+	  - 'install_location.yml'
+	  - 'pipeline_configuration.yml'
+	  - 'roots.yml'
+	  
+	'''
+
+The app have three modules:
+
+ - get_projects_list.py
+ 
+ 	This one finds all the projects from and to where you
+ 	want to synchronize configs. If you need your custom
+ 	behavior, edit this file.
+
+	Also if you want to work with its default functionality,
+	you will need to change the Shotgun API conection values,
+	and maybe the filters to get the projects.
+
+ - sync_job.py
+ 	
+ 	This module manage the folder replication for each job, in
+ 	our case select rsync, but configure it as you need.
+ 	
+ -build_path.py
+ 
+ 	This module gets the job and project paths and based on a
+ 	type that can be "origin" or "target", builds a valid path
+ 	to be used in the replicate job.
+ 	
+ 	Also, this module use the origin and target projects paths
+ 	specified in the jobs_config.yml
+
+
+Licence:
+
+Copyright 2013 Cluster Studio S.C.  All rights reserved
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:
+
+ * Redistributions of source code must retain the above copyright
+   notice, this list of conditions and the following disclaimer.
+
+ * Redistributions in binary form must reproduce the above copyright
+   notice, this list of conditions and the following disclaimer in
+   the documentation and/or other materials provided with the
+   distribution.
+
+ * The name "Cluster Studio" or the names of its contributors 
+   may NOT be used to endorse or promote products derived from this
+   software without specific prior written permission from Cluster Studio.
+
+Disclaimer: THIS SOFTWARE IS PROVIDED BY CLUSTER STUDIO AND
+CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING,
+BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE, NONINFRINGEMENT AND TITLE ARE DISCLAIMED.
+IN NO EVENT SHALL CLUSTER STUDIO, THE COPYRIGHT HOLDER OR
+CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND BASED ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+
+
